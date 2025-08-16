@@ -1,5 +1,5 @@
 import board
-import adafruit_bme280
+import adafruit_bme280.basic as adafruit_bme280
 import RPi.GPIO as GPIO
 import time
 
