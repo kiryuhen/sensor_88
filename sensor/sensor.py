@@ -7,7 +7,6 @@ import time
 RED_PIN = 17
 GREEN_PIN = 27
 BLUE_PIN = 22
-
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(RED_PIN, GPIO.OUT)
 GPIO.setup(GREEN_PIN, GPIO.OUT)
@@ -27,7 +26,7 @@ def set_led_color(color):
 
 # Инициализация датчика BME280
 i2c = board.I2C()
-bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c)
+bme280 = adafruit_bme280.Adafruit_BME280(i2c)  # Исправленная строка
 
 # Функция для чтения данных с датчика и обновления LED
 def read_sensor_data():
@@ -35,7 +34,6 @@ def read_sensor_data():
         temperature = bme280.temperature
         humidity = bme280.relative_humidity
         pressure = bme280.pressure
-
         # Логика для LED на основе температуры
         if temperature > 29:
             set_led_color('red')
@@ -43,7 +41,6 @@ def read_sensor_data():
             set_led_color('blue')
         else:
             set_led_color('green')
-
         return {
             'temperature': round(temperature, 2),
             'humidity': round(humidity, 2),
